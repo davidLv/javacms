@@ -20,4 +20,11 @@
             <value>.jsp</value>
         </property>
     </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/res/**"/>
+            <bean class="org.javacms.interceptors.CheckLoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
