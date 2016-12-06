@@ -7,8 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.mysql.jdbc.log.LogFactory;
-
 public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
 
     private final Logger log = Logger.getLogger(CheckLoginInterceptor.class);
@@ -25,9 +23,10 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
         String userName = (String) request.getSession().getAttribute("userName");
         if (userName == null) {
             log.info("The user does not login yet");
-            modelAndView.setViewName("/admin/index");
+            modelAndView.setViewName("/admin/login");
         } else {
-            response.sendRedirect("/javacms/admin/main");
+            log.info("The user already login, so redirect to backend index page");
+            response.sendRedirect("/javacms/admin/index");
         }
         // TODO Auto-generated method stub
         //super.postHandle(request, response, handler, modelAndView);

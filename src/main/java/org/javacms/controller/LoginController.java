@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class LoginController {
     @Autowired
     private LoginServiceInterface loginService;
+
+    @RequestMapping({"/admin/", "/admin/login"})
+    public String hello(Model model) {
+        model.addAttribute("greeting", "Hello spring mvc");
+        return "/admin/login";
+    }
+
     @RequestMapping(value ="/admin/login", method=RequestMethod.POST)
     public String login(User user, Model model) {
         
