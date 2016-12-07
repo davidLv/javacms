@@ -28,6 +28,7 @@ public class LoginController {
         if (user != null) {
             session.setAttribute("userId", user.getUserId());
             session.setAttribute("userName", user.getUsername());
+            session.setAttribute("lastLoginTime", user.getLastLoginTime());
             //model.addAttribute("userId", user.getUserId());
             //model.addAttribute("userName", user.getUsername());
         }

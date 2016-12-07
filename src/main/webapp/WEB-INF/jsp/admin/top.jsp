@@ -66,7 +66,7 @@ function HoverLi(id){
     $("#tb_"+id).addClass("current");
 }
 function countUnreadMsg(){
-     $.post("message/v_countUnreadMsg.do", {
+     $.post("message/getUnreadMsgCount", {
         }, function(data) {
             if(data.result){
                  $("#countDiv").html(""+data.count+"");
@@ -85,8 +85,7 @@ $(function(){
 });
 setTimeout( "countUnreadMsg() ",1000*60*10); 
 function mapDialog(){
-    var result=window.showModalDialog("map.do","","dialogHeight:600px;dialogWidth:800px;center:yes;resizable
-: yes;");
+    var result=window.showModalDialog("map.do","","dialogHeight:600px;dialogWidth:800px;center:yes;resizable: yes;");
     if(result!=null){
         var href=result.split(";")[0];
         var target=result.split(";")[1];
@@ -124,9 +123,9 @@ function mapDialog(){
           </form>
           <a id="view_index" href="/jeecms/" target="_blank">【查看首页】</a>
         </div>
-        <div class="top_xx"><i class="user-icon"></i>您好, admin<span>|</span><i class="message"></i>您有<a
+        <div class="top_xx"><i class="user-icon"></i>您好, ${userName} <span>|</span><i class="message"></i>您有<a
  href="message/v_list.do" target="rightFrame" class="message-count"><span id="countDiv"></span></a>条
-信息未读<span>|</span><a href="logout.do?returnUrl=index.do" target="_top" id="logout" onclick="return confirm
+信息未读<span>|</span><a href="logout" target="_top" id="logout" onclick="return confirm
 ('您确定退出吗？');" class="login-out">退出</a></div>
         <div class="nav">
             <ul>

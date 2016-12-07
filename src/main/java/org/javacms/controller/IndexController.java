@@ -20,7 +20,8 @@ public class IndexController {
     }
     
     @RequestMapping("/admin/top")
-    public String topAction() {
+    public String topAction(HttpSession session, Model model) {
+        model.addAttribute("userName", session.getAttribute("userName"));
         return "/admin/top";
     }
     
@@ -37,5 +38,11 @@ public class IndexController {
     @RequestMapping("/admin/right")
     public String rightAction() {
         return "/admin/right";
+    }
+    
+    @RequestMapping("/admin/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/admin/";
     }
 }
