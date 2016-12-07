@@ -11,6 +11,7 @@
     <context:component-scan base-package="org.javacms" />
     <mvc:annotation-driven /><!-- 用注解驱动 -->
     <mvc:resources location="/res/**" mapping="/javacms/res/"></mvc:resources>
+    <mvc:resources location="/thirdparty/**" mapping="/javacms/thirdparty/"></mvc:resources>
     <mvc:default-servlet-handler /> <!-- 对于静态资源用default servlet -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
@@ -24,6 +25,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
             <mvc:exclude-mapping path="/res/**"/>
+            <mvc:exclude-mapping path="/admin/login"/>
             <bean class="org.javacms.interceptors.CheckLoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

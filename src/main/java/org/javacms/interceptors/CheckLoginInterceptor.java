@@ -14,20 +14,32 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        return super.preHandle(request, response, handler);
+        String userName = (String) request.getSession().getAttribute("userName");
+        if (userName == null) {
+            log.info("The user does not login yet");
+            request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
+            //response.sendRedirect("/admin/");
+            return false;
+            //modelAndView.setViewName("/admin/login");
+        } else {
+            log.info("The user already login, so redirect to backend index page");
+            //response.sendRedirect("/javacms/admin/index");
+            return true;
+        }
+        //return super.preHandle(request, response, handler);
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
-        String userName = (String) request.getSession().getAttribute("userName");
+        /*String userName = (String) request.getSession().getAttribute("userName");
         if (userName == null) {
             log.info("The user does not login yet");
             modelAndView.setViewName("/admin/login");
         } else {
             log.info("The user already login, so redirect to backend index page");
             response.sendRedirect("/javacms/admin/index");
-        }
+        }*/
         // TODO Auto-generated method stub
         //super.postHandle(request, response, handler, modelAndView);
     }
