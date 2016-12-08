@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional
 .dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -121,42 +122,36 @@ function mapDialog(){
             <option value="1" selected="selected">jeecms演示站</option>
             </select>
           </form>
-          <a id="view_index" href="/jeecms/" target="_blank">【查看首页】</a>
+          <a id="view_index" href="/jeecms/" target="_blank"><spring:message code="global.admin.viewFrontIndex"/></a>
         </div>
-        <div class="top_xx"><i class="user-icon"></i>您好, ${userName} <span>|</span><i class="message"></i>您有<a
- href="message/v_list.do" target="rightFrame" class="message-count"><span id="countDiv"></span></a>条
-信息未读<span>|</span><a href="logout" target="_top" id="logout" onclick="return confirm
-('您确定退出吗？');" class="login-out">退出</a></div>
+        <div class="top_xx"><i class="user-icon"></i><spring:message code="global.admin.welcome" arguments=" ${userName}" argumentSeparator=","/> <span>|</span><i class="message"></i><spring:message code="cmsUser.has"/><a
+ href="message/v_list.do" target="rightFrame" class="message-count"><span id="countDiv"></span></a><spring:message code="cmsUser.unreadcount"/><span>|</span><a href="logout" target="_top" id="logout" onclick="return confirm
+('您确定退出吗？');" class="login-out"><spring:message code="global.admin.logout"/></a></div>
         <div class="nav">
             <ul>
                 <li style="background:none;" id="tb_11" onclick="HoverLi(11);" class="current"><a href
-="main.do" target="mainFrame">首页</a></li>
+="main.do" target="mainFrame"><spring:message code="global.admin.home"/></a></li>
                 <li id="tb_12" onclick="HoverLi(12);"><a href="frame/content_main.do?source=top" target
-="mainFrame">内容</a></li>
+="mainFrame"><spring:message code="cms.function.content"/></a></li>
                 <li class="normal" id="tb_13" onclick="HoverLi(13);"><a href="channel/channel_main.do" target
-="mainFrame">栏目</a></li>
+="mainFrame"><spring:message code="cms.function.channel"/></a></li>
                 <li class="normal" id="tb_14" onclick="HoverLi(14);"><a href="frame/maintain_main.do" target="mainFrame"
->维护</a></li>
+><spring:message code="cms.function.maintain"/></a></li>
                 <li class="normal" id="tb_15" onclick="HoverLi(15);"><a href="frame/user_main.do" target="mainFrame"
->用户</a></li>
+><spring:message code="cms.function.user" /></a></li>
                 <li class="normal" id="tb_16" onclick="HoverLi(16);"><a href="frame/expand_main.do" target="mainFrame"
->扩展</a></li>
+><spring:message code="cms.function.extension"/></a></li>
                 <li class="normal" id="tb_17" onclick="HoverLi(17);"><a href="frame/statistic_main.do" target="mainFrame"
->数据</a></li>
+><spring:message code="cms.function.data"/></a></li>
                 <li class="normal" id="tb_18" onclick="HoverLi(18);"><a href="template/template_main.do" target="mainFrame"
->模板</a></li>
+><spring:message code="cms.function.template"/></a></li>
                 <li class="normal" id="tb_19" onclick="HoverLi(19);"><a href="resource/resource_main.do" target="mainFrame"
->资源</a></li>
+><spring:message code="cms.function.resource"/></a></li>
                 <li class="normal" id="tb_20" onclick="HoverLi(20);"><a href="frame/config_main.do" target="mainFrame"
->配置</a></li>
+><spring:message code="cms.function.config"/></a></li>
             </ul>
         </div>
     </div>
 </div>
-
-
-
-
-
 </body>
 </html>
