@@ -21,12 +21,33 @@
             <value>.jsp</value>
         </property>
     </bean>
+    <!-- <bean id="messageResource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="basenames" >
+            <list>
+                <value>language.messages</value>
+                <value>/WEB-INF/language/messages</value>
+            </list>
+        </property>
+        <property name="basename" value="messages" />
+        <property name="useCodeAsDefaultMessage" value="true" />
+    </bean> -->
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+    <!-- <bean id="cookieLocaleResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/> -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
             <mvc:exclude-mapping path="/res/**"/>
             <mvc:exclude-mapping path="/admin/login"/>
             <bean class="org.javacms.interceptors.CheckLoginInterceptor"></bean>
+        </mvc:interceptor>
+        <!-- <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" ></bean>
+        </mvc:interceptor> -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="localeChangeInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>
