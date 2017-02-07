@@ -1,15 +1,15 @@
 package org.javacms.service.impl;
 
 import org.javacms.dao.MessageDao;
-import org.javacms.service.MessageServiceInterface;
+import org.javacms.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component("messageService")
-public class MessageServiceImpl implements MessageServiceInterface {
+@Service("messageService")
+public class MessageServiceImpl implements MessageService {
     @Autowired
     private MessageDao messageDao;
-    public Integer getMessageCountByUserId(Integer userId) {
+    public int getMessageCountByUserId(Object userId) {
         // TODO Auto-generated method stub
         return this.messageDao.getMessageCountByUserId(userId);
     }

@@ -17,8 +17,8 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
         String userName = (String) request.getSession().getAttribute("userName");
         if (userName == null) {
             log.info("The user does not login yet");
-            request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
-            //response.sendRedirect("/admin/");
+            //request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request, response);
+            response.sendRedirect("/admin/login");
             return false;
             //modelAndView.setViewName("/admin/login");
         } else {

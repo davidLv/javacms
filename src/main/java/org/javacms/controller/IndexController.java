@@ -2,42 +2,47 @@ package org.javacms.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.javacms.core.MemoryStastic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+//@RequestMapping("admin")
 public class IndexController {
-    @RequestMapping({"/admin/"})
+	//@RequestMapping(value = "/admin/tpl", method = RequestMethod.GET)
+    @RequestMapping({"/admin", "/admin/login"})
     public String loginAction(Model model) {
-        model.addAttribute("greeting", "Hello spring mvc");
         return "/admin/login";
     }
     
     @RequestMapping("/admin/index")
     public String indexAction(HttpSession session) {
-        return "/admin/index_frameset";
+        return "/admin/common/layout";
     }
     
     @RequestMapping("/admin/top")
-    public String topAction(HttpSession session, Model model) {
-        model.addAttribute("userName", session.getAttribute("userName"));
-        return "/admin/top";
+    public String topAction(HttpSession session) {
+        return "/admin/common/top";
     }
     
-    @RequestMapping("/admin/content")
+    @RequestMapping("/admin/frame")
     public String contentAction() {
-        return "/admin/index";
+        return "/admin/common/frame";
     }
     
     @RequestMapping("/admin/left")
     public String leftAction() {
-        return "/admin/left";
+        return "/admin/common/left";
     }
     
-    @RequestMapping("/admin/right")
-    public String rightAction() {
-        return "/admin/right";
+    @RequestMapping("/admin/content")
+    public ModelAndView rightAction() {
+    	ModelAndView model = new ModelAndView("/admin/index");
+    	model.addObject("memoryMap", MemoryStastic.getMemoryStastic());
+    	return model;
+        //return "/admin/common/right";
     }
     
     @RequestMapping("/admin/logout")

@@ -1,34 +1,10 @@
-<!-- <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" > -->
-
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	                         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	     version="2.5" >
   <display-name>Archetype Created Web Application</display-name>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/applicationContext*.xml</param-value>
-  </context-param>
-   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <!-- avoid to cause the out of memory issue for spring -->
-  <listener>
-    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-  </listener>
-  <servlet>
-    <servlet-name>javacms</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/javacms-servlet.xml</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>javacms</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
   <!-- to avoid the messy code when posting data -->
   <filter>
     <filter-name>encodingFilter</filter-name>
@@ -46,6 +22,43 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <context-param>
+       <param-name>log4jConfigLocation</param-name>
+       <param-value>/WEB-INF/properties/log4j.properties</param-value>
+  </context-param>
+  <!-- Spring的log4j监听器 -->
+  <listener>
+	<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/config/applicationContext.xml,/WEB-INF/config/applicationContext-dao.xml,/WEB-INF/config/applicationContext-service.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- avoid to cause the out of memory issue for spring -->
+  <!-- <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener> -->
+  <servlet>
+    <servlet-name>javacms</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/config/javacms-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>javacms</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
   <!-- <filter>
     <filter-name>checkLogin</filter-name>
     <filter-class>org.javacms.filter.CheckLoginFiter</filter-class>

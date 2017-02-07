@@ -1,15 +1,38 @@
 package org.javacms.beans;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.javacms.core.validator.group.Regist;
+import org.javacms.core.validator.group.UpdateProfile;
+import org.javacms.core.validator.group.ValidLogin;
 
 public class User {
+	
     private Integer userId;
+    @NotEmpty(message="{username.empty.illegal}", groups={ValidLogin.class, Regist.class})
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message="{username.format.illegal}", groups={ValidLogin.class, Regist.class})
+    @Size(min=5, max=20, message="{username.length.illegal}", groups={ValidLogin.class, Regist.class})
     private String username;
+    
+    @NotEmpty(message="{email.empty.illegal}", groups={Regist.class, UpdateProfile.class})
+    @Email(message="{email.format.illegal}", groups={Regist.class, UpdateProfile.class})
     private String email;
+    
+    @NotEmpty(message="{password.empty.illegal}", groups={ValidLogin.class, Regist.class, UpdateProfile.class})
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message="{password.format.illegal}", groups={ValidLogin.class, Regist.class, UpdateProfile.class})
+    @Size(min=5, max=20, message="{password.length.illegal}", groups={ValidLogin.class, Regist.class, UpdateProfile.class})
     private String password;
+    
     private Date registerTime;
     private String registerIp;
-    private Date lastLoginTime;
+    private String lastLoginIp;
+	private Date lastLoginTime;
     private Integer loginCount;
     private String resetKey;
     private String resetPwd;
@@ -18,9 +41,14 @@ public class User {
     private String errorIp;
     private byte activation;
     private String activationCode;
+    
+    private Role role;
 
-    public User() {
+	public User() {
     }
+	
+	public User(User user) {
+	}
 
     public Integer getUserId() {
         return userId;
@@ -112,4 +140,22 @@ public class User {
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
+    
+    public String getLastLoginIp() {
+		return lastLoginIp;
+	}
+
+	public void setLastLoginIp(String lastLoginIp) {
+		this.lastLoginIp = lastLoginIp;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
+	
 }
