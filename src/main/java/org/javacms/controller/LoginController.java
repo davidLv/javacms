@@ -30,9 +30,14 @@ public class LoginController {
     private AuthenticationManager authenticationManager;
 
     @RequestMapping(value ="/auth/login", method=RequestMethod.POST)
-    public String login(User user, Model model, HttpServletRequest request) {
+    public void login(User user, Model model, HttpServletRequest request) {
+    	
+    	/**commented the below code, since the login function will be done by Spring Security UsernamePasswordAuthenticationFilter
+    	 *and we just need to config the loginProcessingUrl in Spring Security configuration to point the controller and the UsernamePasswordAuthenticationFilter
+    	 *will help us to do the authentication functionality
+    	 */
     	//login with spring security authentication supporting, so that the username and password could be accept by spring security
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+        /*UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         
         try {
         	Authentication authentication = authenticationManager.authenticate(authRequest);
@@ -43,7 +48,7 @@ public class LoginController {
             return "redirect:/admin/index";
         } catch (AuthenticationException ae) {
         	return "redirect:/admin";
-        }
+        }*/
         
     }
 }

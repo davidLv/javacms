@@ -17,7 +17,6 @@ public class CustomUserDetails extends User implements UserDetails {
 	public CustomUserDetails(User user) {
 		this.user = user;
 		this.setUsername(user.getUsername());
-		this.setPassword(user.getPassword());
 	}
 	
 	@Override
@@ -66,4 +65,14 @@ public class CustomUserDetails extends User implements UserDetails {
 		return true;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
+	
 }
