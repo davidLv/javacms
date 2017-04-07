@@ -1,5 +1,7 @@
 package org.javacms.service.impl;
 
+import java.util.List;
+
 import javax.validation.constraints.AssertTrue;
 
 import org.javacms.beans.User;
@@ -27,4 +29,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserByUsername(username);
 	}
 
+	@Override
+	public List<User> getUserList() {
+		// TODO Auto-generated method stub
+		return userDao.getUserList();
+	}
+	
 }

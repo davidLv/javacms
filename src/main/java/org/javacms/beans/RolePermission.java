@@ -1,7 +1,13 @@
 package org.javacms.beans;
 
-public class RolePermission {
-	
+import java.io.Serializable;
+
+public class RolePermission implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3346324395592300941L;
+
 	private Integer roleId;
 	
 	private String uri;

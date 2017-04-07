@@ -1,12 +1,16 @@
 package org.javacms.service;
 
+import java.util.List;
+
 import org.javacms.beans.User;
 
 public interface UserService {
 	
-	public boolean checkUserWithIdAndPassword(String userId, String password);
+	boolean checkUserWithIdAndPassword(String userId, String password);
 	
-	public boolean changePassword(String newPassword, String userId, String oldPassword);
+	boolean changePassword(String newPassword, String userId, String oldPassword);
 	
-	public User getUserByUsername(String username);
+	User getUserByUsername(String username);
+	
+	List<User> getUserList();
 }

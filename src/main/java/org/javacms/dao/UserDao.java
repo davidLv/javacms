@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -38,19 +39,42 @@ public interface UserDao {
         @Result(property="errorCount", column="error_count", javaType=Integer.class),
         @Result(property="errorIp", column="error_ip", javaType=String.class)
     })
-    public User getUserByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+    User getUserByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
     
     @UpdateProvider(type = UserSqlProvider.class, method = "update")
-    public int updateLoginInfo(User user);
+    int updateLoginInfo(User user);
     
     @Select("SELECT count(user_id) FROM jo_user WHERE user_id=#{userId} AND password=#{password}")
-    public int getUserByUserIdAndPassword(@Param("userId") String userId, @Param("password") String password);
+    int getUserByUserIdAndPassword(@Param("userId") String userId, @Param("password") String password);
     
     @Update("UPDATE jo_user SET password=#{newPassword} WHERE user_id=#{userId} AND password=#{oldPassword}")
-    public int updatePassword(@Param("newPassword") String newPassword, @Param("userId") String userId, @Param("oldPassword") String oldPassword);
+    int updatePassword(@Param("newPassword") String newPassword, @Param("userId") String userId, @Param("oldPassword") String oldPassword);
     
     //@Select("SELECT * FROM jo_user WHERE username=#{username} AND activation = 1")
-    public User getUserByUsername(@Param("username") String username);
+     User getUserByUsername(@Param("username") String username);
     
-    public List<Role> getUserRole(@Param("id") int id);
+    List<Role> getUserRole(@Param("id") int id);
+    
+    
+    
+    @Select("SELECT "
+    		+ "user_id,"
+    		+ "username,"
+    		+ "email,"
+    		+ "register_time,"
+    		+ "register_ip,"
+    		+ "last_login_time,"
+    		+ "last_login_ip,"
+    		+ "login_count,"
+    		+ "error_time,"
+    		+ "error_count,"
+    		+ "error_ip,"
+    		+ "activation,"
+    		+ "activation_code "
+    		+ "FROM "
+    		+ "jo_user "
+    		+ "WHERE "
+    		+ "activation = 1")
+    @ResultMap("UserResultMap")
+    List<User> getUserList();
 }

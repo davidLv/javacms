@@ -5,6 +5,15 @@
 	                         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
 	     version="2.5" >
   <display-name>Archetype Created Web Application</display-name>
+  
+  <context-param>
+       <param-name>log4jConfigLocation</param-name>
+       <param-value>/WEB-INF/properties/log4j.properties</param-value>
+  </context-param>
+  <!-- Spring的log4j监听器 -->
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
   <!-- to avoid the messy code when posting data -->
   <filter>
     <filter-name>encodingFilter</filter-name>
@@ -23,18 +32,11 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   
-  <context-param>
-       <param-name>log4jConfigLocation</param-name>
-       <param-value>/WEB-INF/properties/log4j.properties</param-value>
-  </context-param>
-  <!-- Spring的log4j监听器 -->
-  <listener>
-	<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-  </listener>
+  
   
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/config/applicationContext.xml,/WEB-INF/config/applicationContext-dao.xml,/WEB-INF/config/applicationContext-service.xml</param-value>
+    <param-value>/WEB-INF/config/applicationContext.xml,/WEB-INF/config/applicationContext-dao.xml,/WEB-INF/config/applicationContext-service.xml,/WEB-INF/config/applicationContext-cxf.xml,/WEB-INF/config/applicationContext-cache.xml</param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -59,6 +61,16 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   
+  
+  
+  <servlet>
+      <servlet-name>CXF</servlet-name>
+      <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>CXF</servlet-name>
+      <url-pattern>/ws/*</url-pattern>
+  </servlet-mapping>
   <!-- <filter>
     <filter-name>checkLogin</filter-name>
     <filter-class>org.javacms.filter.CheckLoginFiter</filter-class>

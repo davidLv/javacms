@@ -1,9 +1,15 @@
 package org.javacms.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Role {
+public class Role implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -707663801900937912L;
+
 	private Integer id;
 	
 	private Integer siteId;

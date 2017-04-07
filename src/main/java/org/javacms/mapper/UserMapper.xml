@@ -24,6 +24,21 @@
             </collection>
         </collection>
     </resultMap>
+    <resultMap type="org.javacms.beans.User" id="UserResultMap">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="email" property="email"/>
+        <result column="register_time" property="registerTime"/>
+        <result column="register_ip" property="registerIp"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="last_login_ip" property="lastLoginIp"/>
+        <result column="login_count" property="loginCount"/>
+        <result column="error_time" property="errorTime"/>
+        <result column="error_count" property="errorCount"/>
+        <result column="error_ip" property="errorIp"/>
+        <result column="activation" property="errorCount"/>
+        <result column="activation_code" property="activationCode"/>
+    </resultMap>
     <select id="getUserByUsername" parameterType="String" resultMap="userRoleMap">
         SELECT
             jou.user_id,

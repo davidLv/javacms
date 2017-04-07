@@ -33,6 +33,8 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 		
 		session.setAttribute("userId", userDetails.getUser().getUserId());
 		session.setAttribute("username", userDetails.getUser().getUsername());
+		/*session.setAttribute("lastLoginIp", userDetails.getUser().getLastLoginIp());
+		session.setAttribute("lastLoginTime", userDetails.getUser().getLastLoginTime());*/
 		//commented the below code out, since it will cause to redirect to the / and the defaultSuccessUrl in config could not load the session data,
 		//so we should to implment our redirect here
 		//super.onAuthenticationSuccess(request, response, authentication);

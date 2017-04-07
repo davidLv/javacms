@@ -23,11 +23,11 @@ public class LoginController {
     /*@Autowired
     private LoginService loginService;*/
     
-    @Autowired
+    /*@Autowired
     private CustomUserDetailsService customUserDetailsService;
     
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;*/
 
     @RequestMapping(value ="/auth/login", method=RequestMethod.POST)
     public void login(User user, Model model, HttpServletRequest request) {

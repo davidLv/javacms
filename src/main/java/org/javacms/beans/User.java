@@ -1,5 +1,6 @@
 package org.javacms.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,9 +13,13 @@ import org.javacms.core.validator.group.Regist;
 import org.javacms.core.validator.group.UpdateProfile;
 import org.javacms.core.validator.group.ValidLogin;
 
-public class User {
+public class User implements Serializable {
 	
-    private Integer userId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5931455842143278729L;
+	private Integer userId;
     @NotEmpty(message="{username.empty.illegal}", groups={ValidLogin.class, Regist.class})
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message="{username.format.illegal}", groups={ValidLogin.class, Regist.class})
     @Size(min=5, max=20, message="{username.length.illegal}", groups={ValidLogin.class, Regist.class})

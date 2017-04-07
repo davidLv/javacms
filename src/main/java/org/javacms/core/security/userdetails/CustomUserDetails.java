@@ -33,7 +33,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		List<RolePermission> privileges =  user.getRole().getPermission();
 		for (RolePermission privilege : privileges) {
 			if (privilege == null) {
